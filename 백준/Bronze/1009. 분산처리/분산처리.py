@@ -1,0 +1,1 @@
+for l in[*open(0)][1:]:print(10+pow(*map(int,l.split()),-10))
