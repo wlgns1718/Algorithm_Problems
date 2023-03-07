@@ -21,6 +21,10 @@
 | 문제번호 | 링크 |
 | ----- | ----- |
 |1249. ［S／W 문제해결 응용］ 4일차 － 보급로|[링크](./SWEA/D4/1249.%E2%80%85%EF%BC%BBS%EF%BC%8FW%E2%80%85%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0%E2%80%85%EC%9D%91%EC%9A%A9%EF%BC%BD%E2%80%854%EC%9D%BC%EC%B0%A8%E2%80%85%EF%BC%8D%E2%80%85%EB%B3%B4%EA%B8%89%EB%A1%9C/README.md)|
+### 🚀 D5
+| 문제번호 | 링크 |
+| ----- | ----- |
+|1247. ［S／W 문제해결 응용］ 3일차 － 최적 경로|[링크](./SWEA/D5/1247.%E2%80%85%EF%BC%BBS%EF%BC%8FW%E2%80%85%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0%E2%80%85%EC%9D%91%EC%9A%A9%EF%BC%BD%E2%80%853%EC%9D%BC%EC%B0%A8%E2%80%85%EF%BC%8D%E2%80%85%EC%B5%9C%EC%A0%81%E2%80%85%EA%B2%BD%EB%A1%9C/README.md)|
 ## 📚 백준
 ### 🚀 Bronze
 | 문제번호 | 링크 |
