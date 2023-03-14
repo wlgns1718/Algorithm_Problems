@@ -37,10 +37,6 @@ def sol(cnt,answer,select):
                 select[i] = True
                 sol(cnt + 1, answer,select)
                 select[i] = False
-
-
-
-
 N = int(input())
 answer = [9999999999,0]
 
