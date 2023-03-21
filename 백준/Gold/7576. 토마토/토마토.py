@@ -1,10 +1,6 @@
 import sys
-
 input = sys.stdin.readline
-
-
 from collections import deque
-
 answer = 0
 queue = deque()
 
@@ -19,7 +15,7 @@ for i in range(N):
         if box[i][j] == 1:
             queue.append([i,j])
             visit.add((i,j))
-        if box[i][j] == 0:
+        elif box[i][j] == 0:
             zero_cnt += 1
 if zero_cnt == 0:
     print(0)
@@ -34,7 +30,7 @@ else:
                 ny = y+dy[idx]
                 if nx < 0 or nx >= N or ny < 0 or ny >= M:
                     continue
-                if box[nx][ny] == -1 or (nx,ny) in visit:
+                if box[nx][ny] == -1 or box[nx][ny] == 1 or (nx,ny) in visit:
                     continue
                 box[nx][ny] = 1
                 queue.append([nx,ny])
@@ -45,4 +41,5 @@ else:
         for j in range(M):
             if box[i][j] == 0:
                 answer = -1
+                break
     print(answer)
