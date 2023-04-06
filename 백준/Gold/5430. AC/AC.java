@@ -5,73 +5,91 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+
+
 public class Main {
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	static String sol;
+	static String order;
+	static int N;
+	static boolean tri,tri1;
+	static Deque<Integer> deque = new ArrayDeque<>();
+	public static void main(String[] args) throws Exception{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int ans = 0;
-        int ts = Integer.parseInt(br.readLine());
+		int TC = Integer.parseInt(br.readLine());
+		String temp;
+		for(int tc=0; tc<TC; tc++) {
+			tri = false;
+			tri1 = true;
+			deque.clear();
 
-        for (int t = 0; t < ts; ++t) {
-            String com = br.readLine();
-            int n = Integer.parseInt(br.readLine());
-            String s = br.readLine();
-            Boolean chk = false;
-            Boolean err = false;
-            Deque<Integer> dq = new ArrayDeque<>();
-            s = s.substring(1, s.length() - 1);
-            String[] arr = s.split(",");
+			order = br.readLine();
+			N = Integer.parseInt(br.readLine());
+			temp = br.readLine();
+			number(temp);
 
-            if (arr[0].equals("")) {
-                arr = new String[0];
-            }
-            for (int i = 0; i < arr.length; ++i) {
-                dq.add(Integer.parseInt(arr[i]));
-            }
+			for(int od = 0; od<order.length(); od++) {
+				if(order.charAt(od)=='R') {
+					if(tri) {
+						tri = false;
+					}
+					else {
+						tri = true;
+					}
+				}
 
-            for (int i = 0; i < com.length(); ++i) {
-                if (com.charAt(i) == 'R') {
-                    chk = !chk;
-                } else if (com.charAt(i) == 'D') {
-                    if (dq.size() == 0) {
-                        bw.write("error\n");
-                        err = true;
-                        break;
-                    }
-                    if (chk) {
-                        dq.removeLast();
-                    } else {
-                        dq.removeFirst();
-                    }
-                }
-            }
+				else {//tri 초기값은 false
+					if(deque.isEmpty()) {
+						bw.write("error\n");
+						tri1=false;
+						break;
+					}
+					if(!tri) {//처음 자리수 빼기
+						deque.pollFirst();
+					}
+					else {//뒤에 자리수 빼기
+						deque.pollLast();
+					}
+				}
+			}
+			if(!tri1)continue;
+			//남은거 출력
+			
+			sol = print();
+			bw.write(sol+"\n");
+		}
+		bw.close();
 
-            if (err) {
-                continue;
-            }
 
-            bw.write("[");
-            if (!dq.isEmpty()) {
-                if (chk) {
-                    bw.write(dq.getLast() + "");
-                    dq.removeLast();
-                } else {
-                    bw.write(dq.getFirst() + "");
-                    dq.removeFirst();
-                }
-            }
-            while (!dq.isEmpty()) {
-                if (chk) {
-                    bw.write("," + dq.getLast());
-                    dq.removeLast();
-                } else {
-                    bw.write("," + dq.getFirst());
-                    dq.removeFirst();
-                }
-            }
-            bw.write("]\n");
-        }
-        bw.close();
-    }
+	}
+	public static void number(String temp) {
+		String temp1 = temp.substring(1, temp.length() - 1);
+		String[] temp_list = temp1.split(",");
+		if(!temp_list[0].equals("")) {
+			for (int i = 0; i < temp_list.length; i++) {
+				deque.add(Integer.parseInt(temp_list[i]));
+			}
+
+		}
+	}
+
+	public static String print() {
+		StringBuilder answer=new StringBuilder();
+		answer.append("[");
+		while (!deque.isEmpty()) {
+			if(tri) {//뒤에서 빼기
+				answer.append(String.valueOf(deque.pollLast()) +",");
+			}
+			else {//앞에서 빼기
+				answer.append(String.valueOf(deque.pollFirst()) +",");
+			}
+		}
+		if(answer.charAt(answer.length()-1)==',') {
+			answer.deleteCharAt(answer.length()-1);
+		}
+		answer.append("]");
+		return answer.toString();
+	}
+
 }
