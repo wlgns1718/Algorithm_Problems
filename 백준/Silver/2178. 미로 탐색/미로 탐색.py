@@ -1,6 +1,6 @@
 import sys
 from collections import deque
-answer = []
+
 def bfs(queue,visit):
     dx = [0,0,1,-1]
     dy = [1,-1,0,0]
@@ -11,8 +11,8 @@ def bfs(queue,visit):
             nx = cur[0]+dx[idx]
             ny = cur[1] + dy[idx]
             if nx == N-1 and ny == M-1:
-                answer.append(cur[2]+1)
-                continue
+                return cur[2] + 1
+                
             if nx < 0 or ny < 0 or nx >= N or ny >= M: continue
             if ls[nx][ny] == 0: continue
             if (nx,ny) in visit: continue
@@ -31,5 +31,4 @@ queue = deque()
 visit = set()
 queue.append([0,0,1])
 visit.add((0,0))
-bfs(queue,visit)
-print(min(answer))
+print(bfs(queue,visit))
