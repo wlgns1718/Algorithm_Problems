@@ -153,6 +153,7 @@
 |24620. Sleeping in Class|[링크](./%EB%B0%B1%EC%A4%80/Gold/24620.%E2%80%85Sleeping%E2%80%85in%E2%80%85Class/README.md)|
 |2467. 용액|[링크](./%EB%B0%B1%EC%A4%80/Gold/2467.%E2%80%85%EC%9A%A9%EC%95%A1/README.md)|
 |2493. 탑|[링크](./%EB%B0%B1%EC%A4%80/Gold/2493.%E2%80%85%ED%83%91/%ED%83%91.java)|
+|2573. 빙산|[링크](./%EB%B0%B1%EC%A4%80/Gold/2573.%E2%80%85%EB%B9%99%EC%82%B0/%EB%B9%99%EC%82%B0.java)|
 |2623. 음악프로그램|[링크](./%EB%B0%B1%EC%A4%80/Gold/2623.%E2%80%85%EC%9D%8C%EC%95%85%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8/README.md)|
 |2636. 치즈|[링크](./%EB%B0%B1%EC%A4%80/Gold/2636.%E2%80%85%EC%B9%98%EC%A6%88/%EC%B9%98%EC%A6%88.java)|
 |3020. 개똥벌레|[링크](./%EB%B0%B1%EC%A4%80/Gold/3020.%E2%80%85%EA%B0%9C%EB%98%A5%EB%B2%8C%EB%A0%88/README.md)|
