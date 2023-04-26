@@ -1,37 +1,40 @@
-import sys
 from collections import deque
-def zero(farm, queue):
-    while queue:
-        p = queue.popleft()
-        x = p[0]#N
-        y = p[1]#M
-        if x+1<N  and farm[x+1][y] == 1:
-            queue.append((x+1,y))
-            farm[x+1][y] = 0
-        if y+1<M and farm[x][y+1] == 1:
-            queue.append((x,y+1))
-            farm[x][y+1] = 0
-        if x-1>=0 and farm[x-1][y]==1:
-            queue.append((x-1,y))
-            farm[x-1][y]=0
-        if y-1>=0 and farm[x][y-1]==1:
-            queue.append((x,y-1))
-            farm[x][y-1]=0
+import sys
 input = sys.stdin.readline
-T = int(input())
-for _ in range(T):
-    queue = deque()
-    answer = 0
-    M, N, K = map(int,input().split(" "))
-    farm = [[0 for _ in range(M)] for _ in range(N)]
-    for _ in range(K):# 어디에 배추가 심어져 있는지
-        x,y = map(int,input().split(' '))#1,0
-        farm[y][x] = 1
-    for i in range(N):
-        for j in range(M):
-            if farm[i][j] == 1:
-                farm[i][j] = 0
-                answer += 1
-                queue.append((i,j))
-                zero(farm,queue)
-    print(answer)
+
+def bfs(start):
+    Q = deque()
+    Q.append(start)
+    while Q:
+        si,sj = Q.popleft()
+        visited.add((si,sj))
+        for i in range(4):
+            ni = si + di[i]
+            nj = sj + dj[i]
+            if ni < 0 or ni >= M or nj < 0 or nj >= N : continue
+            if (ni,nj) in visited : continue
+            if farm[ni][nj] == 0 :continue
+            Q.append((ni,nj))
+            visited.add((ni,nj))
+
+
+T= int(input())
+di = [-1,1,0,0]
+dj = [0,0,-1,1]
+for tc in range(T):
+    N,M,P = map(int,input().split())
+    farm = [[0]*N for _ in range(M)]
+    visited = set()
+    moo = []
+    for i in range(P):
+        a,b = map(int,input().split())
+        farm[b][a] = 1
+        moo.append((b,a))
+    check = 1
+    for k in moo:
+        i,j = k
+        if (i,j) in visited:
+            continue
+        bfs((i,j))
+        check += 1
+    print(check-1)
