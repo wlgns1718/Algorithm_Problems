@@ -1,59 +1,63 @@
-from itertools import permutations
+import sys
 
-def div(n,m):
-    while (n % m) == 0:
-        n //= m
-    return n
+input = sys.stdin.readline
 
-def pf_cnt(n):
-    fact = 2
-    cnt = 0
-    while n != 1:
-        if fact > int(n**(1/2)):
-            break
-        if cnt == 2:
-            return False
-        if n % fact == 0:
-            n //= fact
-            cnt += 1
-        else:
-            fact += 1
-    if cnt == 1:
-        return True
-    else:
-        return False
+def check1(number):
+    start = 2
+    end = number-2
+    while start < end:
+        if prime[start] and prime[end]:
+            return True
+        start += 1
+        end -= 1
 
-def is_prime(n):
-    fact = 2
-    if n == 1:
-        return False
-    while fact <= int(n ** (1 / 2)):
-        if n % fact == 0:
-            return False
-        fact += 1
-    return True
+    return False
 
-K, M = map(int, input().split())
+def check2(number):
+    div = number
+    while div % M == 0:
+        div //= M
 
-temp = permutations(range(10),K)
+    for t in range(2, int(div ** 0.5) + 1):
+        if prime[t]:
+            if div % t == 0:
+                if prime[div//t]:
+                    return True
+    return False
 
-lst = []
+def sol(idx, number):
+    global answer
+    if idx == K:
+        
+        if check1(int(number)) and check2(int(number)):
+            answer += 1
+        return
+    for n in range(10):
+        if str(n) in number: continue
+        number += str(n)
+        sol(idx+1,number)
+        number = number[:-1]
 
-for i in temp:
-    if i[0] == 0:
+
+K, M = map(int,input().split())
+
+prime = [True] * 98766
+i = 2
+prime[0] = False
+prime[1] = False
+while i < 98766:
+    if not prime[i]:
+        i += 1
         continue
-    lst.append(int(''.join(map(str,i))))
+    for j in range(i+i, 98766, i):
+        prime[j] = False
+    if i > 3:
+        i += 2
+        continue
+    i += 1
 
 answer = 0
 
-for i in lst:
-    if i < 10:
-        temp = div(i,M)
-        if i == 9 and temp == 9:
-            answer +=1
-    else:
-        temp = div(i,M)
-        if i % 2 == 0 or is_prime(i-2):
-            if pf_cnt(temp):
-                answer += 1
+for i in range(1,10):
+    sol(1, str(i))
 print(answer)
