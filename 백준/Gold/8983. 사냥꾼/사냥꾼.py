@@ -18,7 +18,10 @@ for _ in range(N):
     temp = L - b
     if temp < 0:
         temp *= -1
-    animal.append([a-temp,a+temp])
+    if a - temp < 0:
+        animal.append([0,a+temp])
+    else:
+        animal.append([a-temp,a+temp])
 
 catch = [False] * (max(gun)+1)
 for i in gun:
