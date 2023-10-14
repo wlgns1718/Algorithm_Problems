@@ -4,26 +4,24 @@ import java.io.*;
 
 public class Main {
     static int N, M,cnt, answer = -1;
-    static List<int[]> list = new ArrayList<>();
+    static int[] students;
     static boolean[] visit;
     public static void main(String[] args) throws Exception {
 //
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = null;
-
+        int a = 1;
         st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
+        students = new int[M];
         visit = new boolean[M];
         for(int i = 0; i < M; i++){
             st = new StringTokenizer(br.readLine());
             int size = Integer.parseInt(st.nextToken());
-            int[] temp = new int[size];
             for(int j = 0; j < size; j++){
-                temp[j] = Integer.parseInt(st.nextToken());
+                students[i] |= (1 << Integer.parseInt(st.nextToken()));
             }
-            list.add(temp);
-
         }
         for(int i = 1; i <= M; i++){
             if(answer != -1) break;
@@ -32,28 +30,29 @@ public class Main {
         }
         System.out.println(answer);
 
-
     }
     public static void sol(int idx){
+
         if(idx == cnt){
-            HashSet<Integer> number = new HashSet<>();
+            int temp = 1;
             for(int i = 0; i < M; i++){
-                if(!visit[i]) continue;
-                int[] temp_list = list.get(i);
-                for (int j : temp_list) {
-                    number.add(j);
+                if(visit[i]){
+                    temp |= students[i];
                 }
             }
-            if(number.size() == N){
+            if(temp == ((int)Math.pow(2,N+1))-1){
                 answer = idx;
             }
             return;
         }
+
+
         for(int i = 0; i < M; i++){
-            if(visit[i]) continue;
+            if(visit[i])continue;
             visit[i] = true;
-            sol(idx+1);
+            sol(idx + 1);
             visit[i] = false;
         }
     }
+
 }
