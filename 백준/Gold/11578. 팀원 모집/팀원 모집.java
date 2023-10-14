@@ -3,19 +3,19 @@ import java.io.*;
 
 
 public class Main {
-    static int N, M,cnt, answer = -1;
+    static int N, M,cnt, answer = -1,target;
     static int[] students;
     static boolean[] visit;
     public static void main(String[] args) throws Exception {
 //
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = null;
-        int a = 1;
         st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         students = new int[M];
         visit = new boolean[M];
+        target = (int)Math.pow(2,N+1)-1;
         for(int i = 0; i < M; i++){
             st = new StringTokenizer(br.readLine());
             int size = Integer.parseInt(st.nextToken());
@@ -38,9 +38,10 @@ public class Main {
             for(int i = 0; i < M; i++){
                 if(visit[i]){
                     temp |= students[i];
+                    if(temp == target) break;
                 }
             }
-            if(temp == ((int)Math.pow(2,N+1))-1){
+            if(temp == target){
                 answer = idx;
             }
             return;
