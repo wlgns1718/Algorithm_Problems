@@ -2,36 +2,59 @@ import java.util.*;
 
 
 class Solution {
-  public String[] solution(String[] files) {
-
-		Arrays.sort(files, new Comparator<String>() {
-			@Override
-			public int compare(String o1, String o2) {
-				
-				String h1 = o1.split("[0-9]")[0];
-				String h2 = o2.split("[0-9]")[0];
-				
-				int result = h1.toLowerCase().compareTo(h2.toLowerCase());
-
-				if ( result == 0 ) {					
-					// 문자열이 같은 경우 숫자를 비교한다.
-					result = findNum(o1,h1)-findNum(o2,h2);
-				}
-				return result;
-			}
-		});		
-		return files;	
-  }
     
- private int findNum( String s, String h ) {		
-		s = s.replace(h, "");		
-		String result ="";		
-		for( char c : s.toCharArray()) {
-			if( Character.isDigit(c) && result.length() < 5 ) {
-				result+=c;
-			}else
-				break;
-		}
-		return Integer.valueOf(result);
-	}    
+    static PriorityQueue<Data> pq = new PriorityQueue<>((o1,o2) ->{
+        if(o1.head.equals(o2.head)){
+            if(o1.number == o2.number){
+                return o1.idx - o2.idx;
+            }
+            else{
+                return o1.number - o2.number;
+            }
+        }
+        else{
+            return o1.head.compareTo(o2.head);
+        }
+    });
+    
+    static class Data{
+        int idx;
+        String fileName;
+        String head;
+        int number;
+        public Data(int idx, String filename){
+            this.idx = idx;
+            this.fileName = filename;
+            boolean tri = false;
+            int index = 0;
+            for(int i = 0; i < filename.length(); i++){
+                if(filename.charAt(i) >= '0' && filename.charAt(i) <= '9'){
+                    this.head = filename.substring(0, i).toLowerCase();
+                    this.number = findNumber(i, filename);
+                    break;
+                }
+            }
+        }
+    }
+    public String[] solution(String[] files) {
+        String[] answer = new String[files.length];
+        for(int i = 0; i < files.length; i++){
+            pq.offer(new Data(i, files[i]));
+        }
+        int idx = 0;
+        while(!pq.isEmpty()){
+            Data data = pq.poll();
+            answer[idx++] = data.fileName;
+        }
+        return answer;
+    }
+    private static int findNumber(int idx, String filename){
+        StringBuilder sb = new StringBuilder();
+        for(int i = idx; i < idx + 5; i++){
+            if(i >= filename.length()) break;
+            if((filename.charAt(i) < '0') || (filename.charAt(i)) > '9') break;
+            sb.append(filename.charAt(i));
+        }
+        return Integer.parseInt(sb.toString());
+    }
 }
