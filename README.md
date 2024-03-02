@@ -252,6 +252,7 @@
 |11003. 최솟값 찾기|[링크](./%EB%B0%B1%EC%A4%80/Platinum/11003.%E2%80%85%EC%B5%9C%EC%86%9F%EA%B0%92%E2%80%85%EC%B0%BE%EA%B8%B0/README.md)|
 |11402. 이항 계수 4|[링크](./%EB%B0%B1%EC%A4%80/Platinum/11402.%E2%80%85%EC%9D%B4%ED%95%AD%E2%80%85%EA%B3%84%EC%88%98%E2%80%854/README.md)|
 |14252. 공약수열|[링크](./%EB%B0%B1%EC%A4%80/Platinum/14252.%E2%80%85%EA%B3%B5%EC%95%BD%EC%88%98%EC%97%B4/README.md)|
+|1517. 버블 소트|[링크](./%EB%B0%B1%EC%A4%80/Platinum/1517.%E2%80%85%EB%B2%84%EB%B8%94%E2%80%85%EC%86%8C%ED%8A%B8/README.md)|
 ### 🚀 Silver
 | 문제번호 | 링크 |
 | ----- | ----- |
