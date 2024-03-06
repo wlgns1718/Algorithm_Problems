@@ -129,6 +129,7 @@
 |1011. Fly me to the Alpha Centauri|[링크](./%EB%B0%B1%EC%A4%80/Gold/1011.%E2%80%85Fly%E2%80%85me%E2%80%85to%E2%80%85the%E2%80%85Alpha%E2%80%85Centauri/README.md)|
 |1013. Contact|[링크](./%EB%B0%B1%EC%A4%80/Gold/1013.%E2%80%85Contact/README.md)|
 |1025. 제곱수 찾기|[링크](./%EB%B0%B1%EC%A4%80/Gold/1025.%E2%80%85%EC%A0%9C%EA%B3%B1%EC%88%98%E2%80%85%EC%B0%BE%EA%B8%B0/README.md)|
+|1027. 고층 건물|[링크](./%EB%B0%B1%EC%A4%80/Gold/1027.%E2%80%85%EA%B3%A0%EC%B8%B5%E2%80%85%EA%B1%B4%EB%AC%BC/README.md)|
 |1034. 램프|[링크](./%EB%B0%B1%EC%A4%80/Gold/1034.%E2%80%85%EB%9E%A8%ED%94%84/README.md)|
 |1038. 감소하는 수|[링크](./%EB%B0%B1%EC%A4%80/Gold/1038.%E2%80%85%EA%B0%90%EC%86%8C%ED%95%98%EB%8A%94%E2%80%85%EC%88%98/README.md)|
 |1041. 주사위|[링크](./%EB%B0%B1%EC%A4%80/Gold/1041.%E2%80%85%EC%A3%BC%EC%82%AC%EC%9C%84/README.md)|
