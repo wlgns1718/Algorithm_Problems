@@ -4,17 +4,15 @@ import java.util.*;
 public class Main {
 
     static long[] xrr, yrr;
-    static int answer = 0, N, arr[];
+    static int answer = 0, N;
 
     public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
 
         N = Integer.parseInt(br.readLine());
         xrr = new long[N];
         yrr = new long[N];
-        arr = new int[3];
         for (int i = 0; i < N; i++) {
             String[] input = br.readLine().split(" ");
             xrr[i] = Long.parseLong(input[0]);
