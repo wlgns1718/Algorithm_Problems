@@ -22,36 +22,22 @@ public class Main {
         sol(0,0);
         System.out.println(answer);
     }
-
-    private static double get_dis(long x1, long y1, long x2, long y2){
-        return (x1-x2) * (x1-x2) + (y1-y2) * (y1-y2);
-    }
-    private static boolean cal(double a, double b, double c){
-
-        double l1 = Math.max(Math.max(a,b),c);
-        double l2, l3;
-        if(l1 == a){
-            l2 = b;
-            l3 = c;
-        }
-        else if(l1 == b){
-            l2 = a;
-            l3 = c;
-        }
-        else{
-            l2 = a;
-            l3 = b;
-        }
-//        System.out.println("l1 = " + l1 + " l2 = " + l2 + " l3 = " + l3);
-        return l1 == l2 + l3;
-    }
     private static void sol(int idx, int start){
 
         if(idx == 3){
-            if(cal(get_dis(xrr[arr[0]], yrr[arr[0]], xrr[arr[1]], yrr[arr[1]]),
-                    get_dis(xrr[arr[1]], yrr[arr[1]], xrr[arr[2]], yrr[arr[2]]),
-                        get_dis(xrr[arr[0]], yrr[arr[0]], xrr[arr[2]], yrr[arr[2]]))){
-                answer ++;
+            long x1 = xrr[arr[0]];
+            long y1 = yrr[arr[0]];
+            long x2 = xrr[arr[1]];
+            long y2 = yrr[arr[1]];
+            long x3 = xrr[arr[2]];
+            long y3 = yrr[arr[2]];
+            
+            long l1 = (x1-x2) * (x1-x2) + (y1-y2) * (y1-y2);
+            long l2 = (x1-x3) * (x1-x3) + (y1-y3) * (y1-y3);
+            long l3 = (x2-x3) * (x2-x3) + (y2-y3) * (y2-y3);
+            
+            if(l1+l2 == l3 || l2+l3 == l1 || l1+l3 == l2){
+                answer++;
             }
             return;
         }
