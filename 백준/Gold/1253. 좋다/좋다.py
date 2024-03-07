@@ -1,13 +1,14 @@
 import sys
-
 input = sys.stdin.readline
 
-def sol(newList,num):
-    #num되면 return
+
+def is_good(num_list, num):
+
     start = 0
-    end = len(newList) - 1
+    end = len(num_list) - 1
+
     while start < end:
-        a = newList[start] + newList[end]
+        a = num_list[start] + num_list[end]
         if a > num:
             end -= 1
         elif a < num:
@@ -16,16 +17,16 @@ def sol(newList,num):
             return 1
     return 0
 
-N = int(input())
 
-number = list(map(int,input().split()))
-number.sort()
-answer = 0
-if len(number) <= 2:
+N = int(input())
+nums = list(map(int, input().split()))
+nums.sort()
+count = 0
+
+if len(nums) <= 2:
     print(0)
 else:
     for i in range(N):
-        new = number[:i] + number[i+1:]
-        answer += sol(new,number[i])
-
-    print(answer)
+        new = nums[:i] + nums[i+1:]
+        count += is_good(new, nums[i])
+    print(count)
