@@ -1,65 +1,70 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 
 public class Main {
 
-    static int N, M, answer, brr[];
-    static Map<Integer, List<Data>> map = new HashMap<>();
+    static int dist[];
+    static ArrayList<ArrayList<Node>> graph = new ArrayList<>();
+    static int N,M;
 
-    static class Data{
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st =new StringTokenizer(br.readLine() );
+        N = Integer.parseInt(st.nextToken());   //헛간 그래프
+        M = Integer.parseInt(st.nextToken());   //간선
 
-        int x;
-        int val;
+        dist = new int[N+1];
 
-        public Data(int x, int val){
-            this.x = x;
-            this.val = val;
+        for (int i = 0; i <= N ; i++) {
+            graph.add(new ArrayList<>());
+        }
+
+        for(int i =0;i<M;i++){
+            st= new StringTokenizer(br.readLine());
+
+            int A = Integer.parseInt(st.nextToken());
+            int B = Integer.parseInt(st.nextToken());
+            int C = Integer.parseInt(st.nextToken());
+
+            graph.get(A).add(new Node(B,C));
+            graph.get(B).add(new Node(A,C));
+        }
+
+        Arrays.fill(dist,Integer.MAX_VALUE);
+
+        dijst();
+        System.out.println(dist[N]);
+    }
+
+    static void dijst(){
+        PriorityQueue<Node> queue = new PriorityQueue<>((o1, o2) -> o1.cost - o2.cost);
+        queue.add(new Node(1,0));
+        dist[1] = 0;
+
+        while (!queue.isEmpty()){
+              Node now = queue.poll();
+
+              for(Node next : graph.get(now.v)){
+                  if(dist[next.v] > dist[now.v]+next.cost){
+                      dist[next.v] =dist[now.v]+next.cost;
+                      queue.add(new Node(next.v,dist[next.v]));
+                  }
+              }
         }
     }
-    public static void main(String[] args) throws Exception {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static class Node{
+        int v;
+        int cost;
 
-        String[] input = br.readLine().split(" ");
-        N = Integer.parseInt(input[0]);
-        M = Integer.parseInt(input[1]);
-
-        for(int i = 0; i < M; i++){
-            input = br.readLine().split(" ");
-            int a = Integer.parseInt(input[0]) - 1;
-            int b = Integer.parseInt(input[1]) - 1;
-            int val = Integer.parseInt(input[2]);
-
-            if(!map.containsKey(a)){
-                map.put(a, new ArrayList<>());
-            }
-            map.get(a).add(new Data(b, val));
-            if(!map.containsKey(b)){
-                map.put(b, new ArrayList<>());
-            }
-            map.get(b).add(new Data(a, val));
+        public Node(int v,int cost){
+                this.v = v;
+                this.cost = cost;
         }
-
-        brr = new int[N];
-        Arrays.fill(brr, Integer.MAX_VALUE);
-        brr[0] = 0;
-
-        answer = Integer.MAX_VALUE;
-        Queue<Integer> queue = new ArrayDeque<>();
-        queue.offer(0);
-        while(!queue.isEmpty()){
-            int cur = queue.poll();
-            List<Data> ls = map.get(cur);
-
-            for(Data d : ls){
-                if(brr[d.x] > brr[cur] + d.val){
-                    brr[d.x] = brr[cur] + d.val;
-                    queue.offer(d.x);
-                }
-            }
-
-        }
-//        System.out.println(Arrays.toString(brr));
-        System.out.println(brr[N-1]);
     }
 }
