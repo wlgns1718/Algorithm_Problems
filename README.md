@@ -87,6 +87,7 @@
 |15552. 빠른 A＋B|[링크](./%EB%B0%B1%EC%A4%80/Bronze/15552.%E2%80%85%EB%B9%A0%EB%A5%B8%E2%80%85A%EF%BC%8BB/%EB%B9%A0%EB%A5%B8%E2%80%85A%EF%BC%8BB.py)|
 |15593. Lifeguards （Bronze）|[링크](./%EB%B0%B1%EC%A4%80/Bronze/15593.%E2%80%85Lifeguards%E2%80%85%EF%BC%88Bronze%EF%BC%89/Lifeguards%E2%80%85%EF%BC%88Bronze%EF%BC%89.py)|
 |15829. Hashing|[링크](./%EB%B0%B1%EC%A4%80/Bronze/15829.%E2%80%85Hashing/Hashing.py)|
+|15964. 이상한 기호|[링크](./%EB%B0%B1%EC%A4%80/Bronze/15964.%E2%80%85%EC%9D%B4%EC%83%81%ED%95%9C%E2%80%85%EA%B8%B0%ED%98%B8/%EC%9D%B4%EC%83%81%ED%95%9C%E2%80%85%EA%B8%B0%ED%98%B8.py)|
 |16283. Farm|[링크](./%EB%B0%B1%EC%A4%80/Bronze/16283.%E2%80%85Farm/Farm.py)|
 |1712. 손익분기점|[링크](./%EB%B0%B1%EC%A4%80/Bronze/1712.%E2%80%85%EC%86%90%EC%9D%B5%EB%B6%84%EA%B8%B0%EC%A0%90/%EC%86%90%EC%9D%B5%EB%B6%84%EA%B8%B0%EC%A0%90.py)|
 |17945. 통학의 신|[링크](./%EB%B0%B1%EC%A4%80/Bronze/17945.%E2%80%85%ED%86%B5%ED%95%99%EC%9D%98%E2%80%85%EC%8B%A0/README.md)|
