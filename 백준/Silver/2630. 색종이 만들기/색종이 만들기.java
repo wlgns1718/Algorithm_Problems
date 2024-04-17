@@ -37,7 +37,7 @@ public class Main {
         temp = arr[x][y];
         for(int i = x; i < x + l; i++){
             for(int j = y; j < y + l; j++){
-                if(arr[i][j] != temp || visit[i][j]) return;
+                if(arr[i][j] != temp) return;
             }
         }
         for(int i = x; i < x + l; i++){
