@@ -2,10 +2,8 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-
-    static boolean[] visit;
-    static List<String> ls;
-    static int answer, combi[] = new int[3];
+    static int answer, combi[] = new int[3], N;
+    static String[] input;
     public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -13,22 +11,15 @@ public class Main {
 
         int TC = Integer.parseInt(br.readLine());
         for (int tc = 0; tc < TC; tc++) {
-            HashMap<String, Integer> map = new HashMap<>();
-            int N = Integer.parseInt(br.readLine());
-            String[] input = br.readLine().split(" ");
-            ls = new ArrayList<>();
-            answer = Integer.MAX_VALUE;
-
-            for(String s : input){
-                if(!map.containsKey(s)){
-                    map.put(s, 1);
-                    ls.add(s);
-                    continue;
-                }
-                if(map.get(s) == 3) continue;
-                map.replace(s, map.get(s) + 1);
-                ls.add(s);
+            N = Integer.parseInt(br.readLine());
+            if(N > 32){
+                br.readLine();
+                sb.append(0).append("\n");
+                continue;
             }
+            input = br.readLine().split(" ");
+            answer = Integer.MAX_VALUE;
+            
             sol(0, 0);
             sb.append(answer).append("\n");
         }
@@ -42,7 +33,7 @@ public class Main {
                 for(int j = i+1; j < 3; j++){
 
                     for(int p = 0; p < 4; p++){
-                        if(ls.get(combi[i]).charAt(p) != ls.get(combi[j]).charAt(p)) temp++;
+                        if(input[combi[i]].charAt(p) != input[combi[j]].charAt(p)) temp++;
                     }
                 }
             }
@@ -50,7 +41,7 @@ public class Main {
             return;
         }
 
-        for(int i = start; i < ls.size(); i++){
+        for(int i = start; i < N; i++){
             combi[idx] = i;
             sol(idx + 1, i + 1);
         }
