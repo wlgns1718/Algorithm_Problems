@@ -163,6 +163,7 @@
 ### 🚀 Gold
 | 문제번호 | 링크 |
 | ----- | ----- |
+|10026. 적록색약|[링크](./%EB%B0%B1%EC%A4%80/Gold/10026.%E2%80%85%EC%A0%81%EB%A1%9D%EC%83%89%EC%95%BD/README.md)|
 |1011. Fly me to the Alpha Centauri|[링크](./%EB%B0%B1%EC%A4%80/Gold/1011.%E2%80%85Fly%E2%80%85me%E2%80%85to%E2%80%85the%E2%80%85Alpha%E2%80%85Centauri/README.md)|
 |1013. Contact|[링크](./%EB%B0%B1%EC%A4%80/Gold/1013.%E2%80%85Contact/README.md)|
 |1025. 제곱수 찾기|[링크](./%EB%B0%B1%EC%A4%80/Gold/1025.%E2%80%85%EC%A0%9C%EA%B3%B1%EC%88%98%E2%80%85%EC%B0%BE%EA%B8%B0/README.md)|
