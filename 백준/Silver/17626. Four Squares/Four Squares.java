@@ -2,32 +2,32 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int N, answer = Integer.MAX_VALUE;
-    static boolean flag = false;
+    static int N;
     public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
 
         N = Integer.parseInt(br.readLine());
-
-        sol(0, 0, (int) Math.sqrt(N));
-        System.out.println(answer);
+        System.out.println(sol((int) Math.sqrt(N)));
     }
-    private static void sol(int cnt, int num, int start){
+    private static int sol(int start){
+        if(start * start == N) return 1;
 
-        if(num + (start * start) * (4-cnt) < N ) return;
-        if(cnt > 4 || cnt > answer) return;
-        if(num == N){
-            answer = Math.min(answer, cnt);
-            return;
+        for(int i = 1; i <= start; i++){
+            int temp = N - (i * i);
+            if(Math.sqrt(temp) == (int) Math.sqrt(temp)) return 2;
         }
-        for(int i = start; i > 0; i--){
-            if(num + (i*i) > N) continue;
+        
+        for(int i = 1; i <= start; i++){
+            Loop3:
+            for(int j = 1; j <= start; j++){
+                int temp = N - (i*i) - (j*j);
+                if(temp < 0) break Loop3;
+                if(Math.sqrt(temp) == (int) Math.sqrt(temp)) return 3;
+            }
+        }
 
-            int temp = num + (i*i);
-            sol(cnt + 1, temp, (int) Math.sqrt(N - temp));
-        }
+        return 4;
     }
 
 }
