@@ -2,15 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int N, M, X, arr[][];
-    static class Info{
-        int e;
-        int cost;
-        public Info(int e, int cost){
-            this.e = e;
-            this.cost = cost;
-        }
-    }
+    static int N, M, X, go[], back[];
     static class Node{
         int node;
         int cost;
@@ -19,7 +11,9 @@ public class Main {
             this.cost = cost;
         }
     }
-    static Map<Integer, ArrayList<Info>> map = new HashMap<>();
+    static List<List<Node>> GO = new ArrayList<>();
+    static List<List<Node>> BACK = new ArrayList<>();
+
     public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -30,9 +24,12 @@ public class Main {
         M = Integer.parseInt(input[1]);
         X = Integer.parseInt(input[2]) - 1;
 
-        arr = new int[N][N];
+        go = new int[N];
+        back = new int[N];
+
         for(int i = 0; i < N; i++){
-            Arrays.fill(arr[i], Integer.MAX_VALUE);
+            GO.add(new ArrayList<>());
+            BACK.add(new ArrayList<>());
         }
 
         for(int i = 0; i < M; i++){
@@ -40,37 +37,35 @@ public class Main {
             int s = Integer.parseInt(input[0]) - 1;
             int e = Integer.parseInt(input[1]) - 1;
             int cost = Integer.parseInt(input[2]);
-            if(!map.containsKey(s)) map.put(s,new ArrayList<>());
-            arr[s][e] = cost;
-            map.get(s).add(new Info(e, cost));
+            GO.get(s).add(new Node(e, cost));
+            BACK.get(e).add(new Node(s, cost));
         }
-        PriorityQueue<Node> pq = new PriorityQueue<>((o1,o2) -> o1.cost - o2.cost);
 
-        for(int i = 0; i < N; i++){
-            pq.offer(new Node(i, 0));
+        Arrays.fill(go, Integer.MAX_VALUE);
+        Arrays.fill(back, Integer.MAX_VALUE);
 
-            while(!pq.isEmpty()){
-                Node cur = pq.poll();
+        cal(X, GO, go);
+        cal(X, BACK, back);
 
-                if(arr[i][cur.node] < cur.cost) continue;
-
-                arr[i][cur.node] = cur.cost;
-
-                if(map.containsKey(cur.node)){
-
-                    for(Info info : map.get(cur.node)){
-                        pq.offer(new Node(info.e, arr[i][cur.node] + info.cost));
-                    }
-                }
-            }
-        }
         int answer = 0;
 
         for(int i = 0; i < N; i++){
-            int temp = arr[i][X] + arr[X][i];
+            int temp = go[i] + back[i];
             answer = Math.max(answer, temp);
         }
         System.out.println(answer);
     }
+    private static void cal(int start, List<List<Node>> ls, int[] dis){
+        PriorityQueue<Node> pq = new PriorityQueue<>((o1,o2) -> o1.cost - o2.cost);
+        pq.offer(new Node(start, 0));
 
+        while(!pq.isEmpty()){
+            Node cur = pq.poll();
+            if(dis[cur.node] <= cur.cost) continue;
+            dis[cur.node] = cur.cost;
+            for(Node node : ls.get(cur.node)){
+                pq.offer(new Node(node.node, node.cost + dis[cur.node]));
+            }
+        }
+    }
 }
