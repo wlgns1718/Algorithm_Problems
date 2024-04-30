@@ -58,13 +58,20 @@ public class Main {
     private static void cal(int start, List<List<Node>> ls, int[] dis){
         PriorityQueue<Node> pq = new PriorityQueue<>((o1,o2) -> o1.cost - o2.cost);
         pq.offer(new Node(start, 0));
+        boolean[] visit = new boolean[N];
+        dis[start] = 0;
 
         while(!pq.isEmpty()){
+
             Node cur = pq.poll();
-            if(dis[cur.node] <= cur.cost) continue;
-            dis[cur.node] = cur.cost;
+            if(visit[cur.node]) continue;
+            visit[cur.node] = true;
+
             for(Node node : ls.get(cur.node)){
-                pq.offer(new Node(node.node, node.cost + dis[cur.node]));
+                if(dis[node.node] > dis[cur.node] + node.cost){
+                    dis[node.node] = dis[cur.node] + node.cost;
+                    pq.offer(new Node(node.node, dis[node.node]));
+                }
             }
         }
     }
