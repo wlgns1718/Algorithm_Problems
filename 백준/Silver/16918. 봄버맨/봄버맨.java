@@ -5,15 +5,7 @@ public class Main {
     static int N, M, T;
     static char[][] map;
     static int[] dx = {0, 0, 1, -1}, dy = {1, -1, 0, 0};
-    static class Boom{
-        int x;
-        int y;
-        public Boom(int x, int y){
-            this.x = x;
-            this.y = y;
-        }
-    }
-    static Queue<Boom> boom = new ArrayDeque<>();
+    static boolean[][] boom;
     public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -24,45 +16,40 @@ public class Main {
         M = Integer.parseInt(st.nextToken());
         T = Integer.parseInt(st.nextToken());
         map = new char[N][M];
-
+        boom = new boolean[N][M];
         for(int i = 0; i < N; i++){
             String input = br.readLine();
             for(int j = 0; j < M; j++){
                 map[i][j] = input.charAt(j);
                 if(map[i][j] == 'O'){
-                    boom.offer(new Boom(i, j));
+                    boom[i][j] = true;
                 }
             }
         }
         int time = 1;
         boolean flag = true;
-        int boom_size = 0;
         while(time < T){
             if(flag){
-                boom_size = boom.size();
-                for(int i = 0; i < N; i++){
-                    for(int j = 0; j < M; j++){
-                        if(map[i][j] == '.'){
-                            map[i][j] = 'O';
-                        }
-                    }
-                }
+                fill_boom();
                 flag = false;
             }
             else{
-                for(int i = 0; i < boom_size; i++){
-                    Boom cur = boom.poll();
-                    map[cur.x][cur.y] = '.';
-                    for(int idx = 0; idx < 4; idx++){
-                        int nx = cur.x + dx[idx];
-                        int ny = cur.y + dy[idx];
-                        if(nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
-                        map[nx][ny] = '.';
+                for(int i = 0; i < N; i++){
+                    for(int j = 0; j < M; j++){
+                        if(!boom[i][j]) continue;
+                        boom[i][j] = false;
+                        map[i][j] = '.';
+                        for(int idx = 0; idx < 4; idx ++){
+                            int nx = i + dx[idx];
+                            int ny = j + dy[idx];
+                            if(nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
+                            map[nx][ny] = '.';
+                        }
                     }
                 }
                 for(int i = 0; i < N; i++){
                     for(int j = 0; j < M; j++){
-                        if(map[i][j] == 'O')boom.offer(new Boom(i, j));
+                        if(map[i][j] == 'O')boom[i][j] = true;
                     }
                 }
                 flag = true;
@@ -76,5 +63,14 @@ public class Main {
             sb.append("\n");
         }
         System.out.println(sb);
+    }
+    private static void fill_boom(){
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < M; j++){
+                if(map[i][j] == '.'){
+                    map[i][j] = 'O';
+                }
+            }
+        }
     }
 }
