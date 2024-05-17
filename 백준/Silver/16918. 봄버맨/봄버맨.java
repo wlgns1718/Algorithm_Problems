@@ -15,6 +15,24 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         T = Integer.parseInt(st.nextToken());
+        if(T % 2 == 0 || T == 1){
+            if(T == 1){
+                for(int i = 0; i < N; i++){
+                    String input = br.readLine();
+                    sb.append(input).append("\n");
+                }
+            }
+            else{
+                for(int i = 0; i < N; i++){
+                    for(int j = 0; j < M; j++){
+                        sb.append('O');
+                    }
+                    sb.append("\n");
+                }
+            }
+            System.out.println(sb);
+            return;
+        }
         map = new char[N][M];
         boom = new boolean[N][M];
         for(int i = 0; i < N; i++){
