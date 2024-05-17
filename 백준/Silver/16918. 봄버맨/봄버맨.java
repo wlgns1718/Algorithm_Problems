@@ -15,78 +15,94 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         T = Integer.parseInt(st.nextToken());
-        if(T % 2 == 0 || T == 1){
-            if(T == 1){
-                for(int i = 0; i < N; i++){
-                    String input = br.readLine();
-                    sb.append(input).append("\n");
-                }
-            }
-            else{
-                for(int i = 0; i < N; i++){
-                    for(int j = 0; j < M; j++){
-                        sb.append('O');
-                    }
-                    sb.append("\n");
-                }
-            }
-            System.out.println(sb);
-            return;
-        }
-        map = new char[N][M];
-        boom = new boolean[N][M];
-        for(int i = 0; i < N; i++){
-            String input = br.readLine();
-            for(int j = 0; j < M; j++){
-                map[i][j] = input.charAt(j);
-                if(map[i][j] == 'O'){
-                    boom[i][j] = true;
-                }
+        if(T == 1){
+            for(int i = 0; i < N; i++){
+                String input = br.readLine();
+                sb.append(input).append("\n");
             }
         }
-        int time = 1;
-        boolean flag = true;
-        while(time < T){
-            if(flag){
-                fill_boom();
-                flag = false;
-            }
-            else{
-                for(int i = 0; i < N; i++){
-                    for(int j = 0; j < M; j++){
-                        if(!boom[i][j]) continue;
-                        boom[i][j] = false;
-                        map[i][j] = '.';
-                        for(int idx = 0; idx < 4; idx ++){
-                            int nx = i + dx[idx];
-                            int ny = j + dy[idx];
-                            if(nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
-                            map[nx][ny] = '.';
-                        }
-                    }
+        else if(T % 2 == 0){
+            for(int i = 0; i < N; i++){
+                for(int j = 0; j < M; j++){
+                    sb.append('O');
                 }
-                for(int i = 0; i < N; i++){
-                    for(int j = 0; j < M; j++){
-                        if(map[i][j] == 'O')boom[i][j] = true;
-                    }
-                }
-                flag = true;
+                sb.append("\n");
             }
-            time ++;
         }
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < M; j++){
-                sb.append(map[i][j]);
+        else if(T % 4 == 1){
+            map = new char[N][M];
+            boom = new boolean[N][M];
+            for(int i = 0; i < N; i++){
+                String input = br.readLine();
+                for(int j = 0; j < M; j++){
+                    map[i][j] = input.charAt(j);
+                    if(map[i][j] == 'O'){
+                        boom[i][j] = true;
+                    }
+                }
             }
-            sb.append("\n");
+            sol();
+            sol2();
+            sol();
+            for(int i = 0; i < N; i++){
+                for(int j = 0; j < M; j++){
+                    sb.append(map[i][j]);
+                }
+                sb.append("\n");
+            }
+        }
+        else{
+            map = new char[N][M];
+            boom = new boolean[N][M];
+            for(int i = 0; i < N; i++){
+                String input = br.readLine();
+                for(int j = 0; j < M; j++){
+                    map[i][j] = input.charAt(j);
+                    if(map[i][j] == 'O'){
+                        boom[i][j] = true;
+                    }
+                }
+            }
+            sol();
+            for(int i = 0; i < N; i++){
+                for(int j = 0; j < M; j++){
+                    sb.append(map[i][j]);
+                }
+                sb.append("\n");
+            }
         }
         System.out.println(sb);
     }
+
+    private static void sol2() {
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < M; j++){
+                if(map[i][j] == 'O') boom[i][j] = true;
+            }
+        }
+    }
+
     private static void fill_boom(){
         for(int i = 0; i < N; i++){
             for(int j = 0; j < M; j++){
                 if(map[i][j] == '.'){
                     map[i][j] = 'O';
+                }
+            }
+        }
+    }
+    private static void sol(){
+        fill_boom();
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < M; j++){
+                if(!boom[i][j]) continue;
+                boom[i][j] = false;
+                map[i][j] = '.';
+                for(int idx = 0; idx < 4; idx ++){
+                    int nx = i + dx[idx];
+                    int ny = j + dy[idx];
+                    if(nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
+                    map[nx][ny] = '.';
                 }
             }
         }
