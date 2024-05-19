@@ -2,7 +2,6 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static final int IDX = 65;
     static int N;
     static boolean[] visit;
     static String word;
@@ -30,9 +29,9 @@ public class Main {
             char letter = temp.charAt(0);
             int a = Character.toUpperCase(letter);
             int b = Character.toLowerCase(letter);
-            if(visit[a-IDX] || visit[b-IDX]) continue;
-            visit[a-IDX] = true;
-            visit[b-IDX] = true;
+            if(visit[a-65] || visit[b-65]) continue;
+            visit[a-65] = true;
+            visit[b-65] = true;
             for(int j = 0; j < input.length; j++){
                 if(j == i){
                     sb.append("[").append(input[j].charAt(0)).append("]")
@@ -51,12 +50,11 @@ public class Main {
     private static boolean check2(){
         for(int i = 0; i < word.length(); i++){
             if(word.charAt(i) == ' ') continue;
-            if(visit[word.charAt(i) - IDX]) continue;
+            if(visit[word.charAt(i) - 65]) continue;
             int a = Character.toUpperCase(word.charAt(i));
             int b = Character.toLowerCase(word.charAt(i));
-            visit[a-IDX] = true;
-            visit[b-IDX] = true;
-
+            visit[a-65] = true;
+            visit[b-65] = true;
             for(int j = 0; j < word.length(); j++){
                 if(i != j){
                     sb.append(word.charAt(j));
