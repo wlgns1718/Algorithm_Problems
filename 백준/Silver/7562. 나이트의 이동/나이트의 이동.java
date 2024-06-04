@@ -36,6 +36,7 @@ public class Main {
         System.out.println(sb);
     }
     private static int sol(){
+        
         Queue<Info> q = new ArrayDeque<>();
         q.offer(new Info(sx, sy, 0));
         visit[sx][sy] = true;
