@@ -2,8 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static int R, C, dx[] = {0, 0, 1, -1}, dy[] = {1, -1, 0, 0};
-    static boolean[][] visit;
+    static int R, C, dx[] = {0, 0, 1, -1}, dy[] = {1, -1, 0, 0}, arr[][], brr[][];
     static char[][] map;
     static class Info{
         int x;
@@ -19,14 +18,20 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
         String[] input;
+
         input = br.readLine().split(" ");
         R = Integer.parseInt(input[0]);
         C = Integer.parseInt(input[1]);
-        map = new char[R][C];
-        visit = new boolean[R][C];
 
+        map = new char[R][C];
+        arr = new int[R][C];
+        brr = new int[R][C];
+
+        Queue<Info> water = new ArrayDeque<>();
         for(int i = 0; i < R; i++){
             String temp = br.readLine();
+            Arrays.fill(arr[i], Integer.MAX_VALUE);
+            Arrays.fill(brr[i], Integer.MAX_VALUE);
             for(int j = 0; j < C; j++){
                 map[i][j] = temp.charAt(j);
                 if(map[i][j] == 'S'){
@@ -37,71 +42,50 @@ public class Main {
                     ex = i;
                     ey = j;
                 }
-            }
-        }
-
-        int answer = sol();
-        if(answer == -1) sb.append("KAKTUS");
-        else sb.append(answer);
-        System.out.println(sb);
-    }
-    private static int sol(){
-        Queue<Info> q = new ArrayDeque<>();
-        q.offer(new Info(sx, sy));
-        visit[sx][sy] = true;
-        int time = 0;
-        while(!q.isEmpty()){
-            int len = q.size();
-            fill_water();
-
-            for(int i = 0; i < len; i++){
-                Info cur = q.poll();
-                if(cur.x == ex && cur.y == ey) return time;
-                for(int idx = 0; idx < 4; idx++){
-                    int nx = cur.x + dx[idx];
-                    int ny = cur.y + dy[idx];
-
-                    if(nx < 0 || ny < 0 || nx >= R || ny >= C) continue;
-                    if(visit[nx][ny]) continue;
-                    if(map[nx][ny] == 'X' || map[nx][ny] == '*') continue;
-                    visit[nx][ny] = true;
-                    map[nx][ny] = 'S';
-                    q.offer(new Info(nx, ny));
-                }
-            }
-            time ++;
-        }
-        return -1;
-    }
-    private static void fill_water(){
-        Queue<Info> q = new ArrayDeque<>();
-
-        for(int i = 0; i < R; i++){
-            for(int j = 0; j < C; j++){
-                if(visit[i][j]) continue;
-                if(map[i][j] == '*') {
-                    q.offer(new Info(i, j));
-                    visit[i][j] = true;
+                if(map[i][j] == '*'){
+                    water.offer(new Info(i, j));
+                    brr[i][j] = 0;
                 }
             }
         }
-        while(!q.isEmpty()){
-            Info info = q.poll();
+        while(!water.isEmpty()){
+            Info cur = water.poll();
             for(int idx = 0; idx < 4; idx++){
-                int nx = info.x + dx[idx];
-                int ny = info.y + dy[idx];
+                int nx = cur.x + dx[idx];
+                int ny = cur.y + dy[idx];
                 if(nx < 0 || ny < 0 || nx >= R || ny >= C) continue;
                 if(map[nx][ny] == 'X' || map[nx][ny] == 'D') continue;
-                map[nx][ny] = '*';
+                if(brr[nx][ny] <= brr[cur.x][cur.y] + 1) continue;
+                brr[nx][ny] = brr[cur.x][cur.y] + 1;
+                water.offer(new Info(nx, ny));
             }
         }
-//        print();
-    }
-    private static void print(){
-
-        for(int i = 0; i < R; i++){
-            System.out.println(Arrays.toString(map[i]));
+        water.offer(new Info(sx, sy));
+        arr[sx][sy] = 0;
+        while(!water.isEmpty()){
+            Info cur = water.poll();
+            for(int idx = 0; idx < 4; idx++){
+                int nx = cur.x + dx[idx];
+                int ny = cur.y + dy[idx];
+                if(nx < 0 || ny < 0 || nx >= R || ny >= C) continue;
+                if(map[nx][ny] == 'X' || map[nx][ny] == 'D') continue;
+                if(arr[nx][ny] <= arr[cur.x][cur.y] + 1) continue;
+                arr[nx][ny] = arr[cur.x][cur.y] + 1;
+                water.offer(new Info(nx, ny));
+            }
         }
-        System.out.println();
+
+        int answer = Integer.MAX_VALUE;
+
+        for(int idx = 0; idx < 4; idx++){
+            int nx = ex + dx[idx];
+            int ny = ey + dy[idx];
+            if(nx < 0 || ny < 0 || nx >= R || ny >= C) continue;
+            if(arr[nx][ny] >= brr[nx][ny]) continue;
+            answer = Math.min(answer, arr[nx][ny] + 1);
+        }
+        if(answer == Integer.MAX_VALUE) sb.append("KAKTUS");
+        else sb.append(answer);
+        System.out.println(sb);
     }
 }
