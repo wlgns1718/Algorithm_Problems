@@ -24,6 +24,7 @@ public class Main {
             int b = Integer.parseInt(temp[1]) - 1;
             int cost = Integer.parseInt(temp[2]);
             arr[a][b] = cost;
+            arr[b][a] = cost;
         }
         int start = input[2] - 1;
         visit[start] = true;
@@ -41,7 +42,7 @@ public class Main {
         }
         //현재에서 갈 수 있는 곳 탐색
         for(int i = 0; i < input[0]; i++){
-            if(i == cur || arr[cur][i] == 0) continue;
+            if(arr[cur][i] == 0) continue;
             //가진 비용으로 갈 수 있는지 판단
             if(cost + arr[cur][i] > input[4]) continue;
             //이미 방문했는지 확인
