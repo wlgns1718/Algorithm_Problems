@@ -99,6 +99,7 @@
 |1546. 평균|[링크](./%EB%B0%B1%EC%A4%80/Bronze/1546.%E2%80%85%ED%8F%89%EA%B7%A0/README.md)|
 |15552. 빠른 A＋B|[링크](./%EB%B0%B1%EC%A4%80/Bronze/15552.%E2%80%85%EB%B9%A0%EB%A5%B8%E2%80%85A%EF%BC%8BB/%EB%B9%A0%EB%A5%B8%E2%80%85A%EF%BC%8BB.py)|
 |15593. Lifeguards （Bronze）|[링크](./%EB%B0%B1%EC%A4%80/Bronze/15593.%E2%80%85Lifeguards%E2%80%85%EF%BC%88Bronze%EF%BC%89/Lifeguards%E2%80%85%EF%BC%88Bronze%EF%BC%89.py)|
+|15680. 연세대학교|[링크](./%EB%B0%B1%EC%A4%80/Bronze/15680.%E2%80%85%EC%97%B0%EC%84%B8%EB%8C%80%ED%95%99%EA%B5%90/README.md)|
 |15829. Hashing|[링크](./%EB%B0%B1%EC%A4%80/Bronze/15829.%E2%80%85Hashing/README.md)|
 |15964. 이상한 기호|[링크](./%EB%B0%B1%EC%A4%80/Bronze/15964.%E2%80%85%EC%9D%B4%EC%83%81%ED%95%9C%E2%80%85%EA%B8%B0%ED%98%B8/README.md)|
 |16283. Farm|[링크](./%EB%B0%B1%EC%A4%80/Bronze/16283.%E2%80%85Farm/README.md)|
