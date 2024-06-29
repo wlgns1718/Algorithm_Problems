@@ -7,16 +7,14 @@ public class Main {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        String[] input = br.readLine().split(" ");
-        N = Integer.parseInt(input[0]);
-        M = Integer.parseInt(input[1]);
+        N = read();
+        M = read();
         Deque<Integer> dodo = new LinkedList<>();
         Deque<Integer> su = new LinkedList<>();
 
         for(int i = 0; i < N; i++){
-            input = br.readLine().split(" ");
-            dodo.offer(Integer.parseInt(input[0]));
-            su.offer(Integer.parseInt(input[1]));
+            dodo.offer(read());
+            su.offer(read());
         }
         Deque<Integer> do_ground = new LinkedList<>();
         Deque<Integer> su_ground = new LinkedList<>();
@@ -71,5 +69,10 @@ public class Main {
 
         System.out.println(sb);
     }
-
+    private static int read() throws Exception {
+        int c, n = System.in.read() & 15;
+        while ((c = System.in.read()) >= 48)
+            n = (n << 3) + (n << 1) + (c & 15);
+        return n;
+    }
 }
