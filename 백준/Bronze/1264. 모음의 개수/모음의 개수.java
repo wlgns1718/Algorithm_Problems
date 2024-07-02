@@ -2,16 +2,11 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static char[] arr = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
     public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        Set<Character> vowels = new HashSet<>();
-        for(char temp : arr){
-            vowels.add(temp);
-        }
-
+        Set<Character> vowels = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'));
         while(true){
             String input = br.readLine();
             if(input.equals("#")) break;
