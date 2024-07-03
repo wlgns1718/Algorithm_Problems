@@ -4,11 +4,9 @@ import java.io.*;
 public class Main {
     static int N, M;
     static int[][] arr;
-
     static class Info{
         int size;
         int idx;
-
         public Info(int size, int idx){
             this.size = size;
             this.idx = idx;
@@ -18,7 +16,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
+        
         String[] input = br.readLine().split(" ");
         M = Integer.parseInt(input[0]); //우주 개수
         N = Integer.parseInt(input[1]); //행성 개수
@@ -32,6 +30,7 @@ public class Main {
             for (int j = 0; j < N; j++) {
                 pq.offer(new Info(Integer.parseInt(input[j]), j));
             }
+            
             Info info = pq.poll();
             int val = 0;
             arr[i][info.idx] = val;
@@ -41,23 +40,22 @@ public class Main {
                 if (pre_size == info.size) {
                     arr[i][info.idx] = val;
                 } else {
-                    val++;
-                    arr[i][info.idx] = val;
+                    arr[i][info.idx] = ++val;
+                    pre_size = info.size;
                 }
-                pre_size = info.size;
             }
         }
+        
         int answer = 0;
-        boolean flag = true;
+        boolean flag;
         for(int i = 0; i < M; i++){
             for(int j = i + 1; j < M; j++){
                 flag = true;
-
-                Loop:
+                
                 for(int idx = 0; idx < N; idx++){
                     if(arr[i][idx] != arr[j][idx]){
                         flag = false;
-                        break Loop;
+                        break;
                     }
                 }
                 if(flag) answer ++;
