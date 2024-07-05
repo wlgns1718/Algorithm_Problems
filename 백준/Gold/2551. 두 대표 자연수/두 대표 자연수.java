@@ -1,23 +1,31 @@
-import java.util.*;
 import java.io.*;
 
 public class Main {
-    static int N, nums[];
+    static int N, nums[] = new int[10001];
     public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
         N = Integer.parseInt(br.readLine());
-        nums = new int[N];
         String[] input = br.readLine().split(" ");
+
         long sum = 0;
         for(int i = 0; i < N; i++){
-            nums[i] = Integer.parseInt(input[i]);
-            sum += nums[i];
+            int a = Integer.parseInt(input[i]);
+            nums[a] ++;
+            sum += a;
         }
-        Arrays.sort(nums);
-        int idx = N % 2 == 0 ?  N/2 - 1 : N/2;
-        sb.append(nums[idx]).append(" ");
+
+        int idx = N % 2 == 0 ?  N/2 : N/2 + 1;
+        int cnt = 0;
+
+        for(int i = 1; i <= 10000; i++){
+            cnt += nums[i];
+            if(cnt >= idx){
+                sb.append(i).append(" ");
+                break;
+            }
+        }
         if(sum % N == 0){
             sb.append(sum/N);
         }
@@ -27,9 +35,10 @@ public class Main {
             long answer = 0;
             long total1 = 0;
             long total2 = 0;
-            for(int i = 0; i < N; i++){
-                total1 += (long) Math.pow((nums[i] - case1), 2);
-                total2 += (long) Math.pow((nums[i] - case2), 2);
+            for(int i = 1; i <= 10000; i++){
+                if(nums[i] == 0) continue;
+                total1 += (long) Math.pow((i - case1), 2) * nums[i];
+                total2 += (long) Math.pow((i - case2), 2) * nums[i];
 
             }
             answer = (total1 <= total2) ? case1 : case2;
