@@ -1,20 +1,10 @@
 import java.io.*;
-import java.util.ArrayDeque;
-import java.util.Arrays;
-
 public class Main {
-    static int N, arr[] = new int[21];
+    static int[] arr= {0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765};
     public static void main(String[] args) throws Exception {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        init();
-        N = Integer.parseInt(br.readLine());
-        System.out.println(arr[N]);
+        System.out.println(arr[Integer.parseInt(br.readLine())]);
     }
-    private static void init(){
-        arr[1] = 1;
-        for(int i = 2; i <= 20; i++){
-            arr[i] = arr[i-1] + arr[i-2];
-        }
-    }
+    
 }
